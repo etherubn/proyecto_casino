@@ -2,8 +2,8 @@ package com.atlantic.proyect.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotNull;
+
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,10 +12,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class JugadorDtoRequest {
+public class UsuarioUpdateDtoRequest {
     @JsonProperty("id")
-    private Long idJugador;
-    @Valid
-    @NotNull(message = "El usuario es requerido")
-    private UsuarioDtoRequest usuario;
+    private Long idUsuario;
+    private Boolean activo;
+    @Size(min = 3,max = 16,message = "El username debe tener entre 3 y 16 caracteres")
+    private String username;
+    private String foto;
+    private PersonaUpdateDtoRequest persona;
 }

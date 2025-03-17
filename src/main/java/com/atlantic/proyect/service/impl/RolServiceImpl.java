@@ -2,11 +2,14 @@ package com.atlantic.proyect.service.impl;
 
 import com.atlantic.proyect.dto.request.RolDtoRequest;
 import com.atlantic.proyect.entity.Rol;
+import com.atlantic.proyect.exception.ExceptionGeneric;
 import com.atlantic.proyect.repository.RolRepo;
 import com.atlantic.proyect.repository.GenericRepo;
 import com.atlantic.proyect.service.IRolService;
 import com.atlantic.proyect.utils.MapperUtil;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class RolServiceImpl extends CRUDImpl<Rol, RolDtoRequest,Long> implements IRolService {
@@ -35,5 +38,11 @@ public class RolServiceImpl extends CRUDImpl<Rol, RolDtoRequest,Long> implements
     @Override
     protected void setId(Rol entity, Long aLong) {
         entity.setIdRol(aLong);
+    }
+
+    @Override
+    public RolDtoRequest findRolByTipoRol(String tipoRol) {
+        Rol rol = rolRepo.findOneByTipoRol_Nombre(tipoRol).orElseThrow(()-> new ExceptionGeneric("No existe el rol"));
+        return mapperUtil.map(rol, RolDtoRequest.class);
     }
 }

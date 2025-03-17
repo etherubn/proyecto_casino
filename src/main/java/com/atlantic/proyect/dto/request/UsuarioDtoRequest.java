@@ -2,7 +2,9 @@ package com.atlantic.proyect.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
@@ -30,7 +32,9 @@ public class UsuarioDtoRequest {
     @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{6,12}$", message = "Debe contener solo número y letras.")
     @Size(min = 6,max = 12,message = "La contraseña debe tener entre 6 y 12 caracteres")
     private String password;
-    private String foto;
+    private String foto = "no";
+    @Valid
+    @NotNull(message = "Debe contener persona")
     private PersonaDtoRequest persona;
     private Set<RolDtoRequest> roles;
 }

@@ -21,7 +21,7 @@ public class Usuario {
     @Column(nullable = false)
     private LocalDate fechaRegistro;
     @Column(nullable = false)
-    private boolean activo;
+    private Boolean activo;
     @Column(nullable = false, unique = true)
     private String username;
     @Column(nullable = false)
@@ -29,7 +29,7 @@ public class Usuario {
     private String foto;
 
     @OneToOne
-    @JoinColumn(name = "id_persona",foreignKey = @ForeignKey(name = "FK_USUARIO_PERSONA"))
+    @JoinColumn(name = "id_persona",foreignKey = @ForeignKey(name = "FK_USUARIO_PERSONA"),nullable = false)
     private Persona persona;
 
     @ManyToMany

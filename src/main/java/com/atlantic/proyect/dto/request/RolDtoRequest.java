@@ -1,6 +1,5 @@
 package com.atlantic.proyect.dto.request;
 
-import com.atlantic.proyect.entity.TipoRol;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;

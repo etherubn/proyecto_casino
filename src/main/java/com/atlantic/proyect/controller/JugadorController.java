@@ -29,7 +29,7 @@ public class JugadorController {
 
     @PostMapping
     public ResponseEntity<GenericResponse<JugadorDtoRequest>> save(@RequestBody @Valid JugadorDtoRequest jugadorDtoRequest) {
-        return new ResponseEntity<>(new GenericResponse<>(Arrays.asList(jugadorService.save(jugadorDtoRequest)),201,"recurso creado"), HttpStatus.CREATED);
+        return new ResponseEntity<>(new GenericResponse<>(Arrays.asList(jugadorService.crearJugador(jugadorDtoRequest)),201,"recurso creado"), HttpStatus.CREATED);
     }
 
     @DeleteMapping("/{id}")

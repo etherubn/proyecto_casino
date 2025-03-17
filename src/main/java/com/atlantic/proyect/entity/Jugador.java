@@ -17,7 +17,7 @@ public class Jugador {
     private Long idJugador;
 
     @OneToOne
-    @JoinColumn(name = "id_usuario")
+    @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
 
 }
