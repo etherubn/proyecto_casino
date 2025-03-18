@@ -54,6 +54,7 @@ public class LocalServiceImpl extends CRUDImpl<Local, LocalDtoRequest,Long> impl
     }
 
     @Override
+    @Transactional
     public LocalDtoRequest update(LocalDtoRequest localDtoRequest, Long aLong) {
         if (localRepo.existsByNombreIgnoreCaseAndIdLocalIsNot(localDtoRequest.getNombre(), aLong)) {
             Map<String,String> errors = new HashMap<>();
