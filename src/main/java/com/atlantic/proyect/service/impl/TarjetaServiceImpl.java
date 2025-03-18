@@ -1,6 +1,6 @@
 package com.atlantic.proyect.service.impl;
 
-import com.atlantic.proyect.dto.request.TarjetaDtoRequest;
+import com.atlantic.proyect.dto.request.create.TarjetaDtoRequest;
 import com.atlantic.proyect.entity.Tarjeta;
 import com.atlantic.proyect.repository.TarjetaRepo;
 import com.atlantic.proyect.repository.GenericRepo;

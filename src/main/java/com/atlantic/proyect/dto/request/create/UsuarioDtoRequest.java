@@ -1,4 +1,4 @@
-package com.atlantic.proyect.dto.request;
+package com.atlantic.proyect.dto.request.create;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;

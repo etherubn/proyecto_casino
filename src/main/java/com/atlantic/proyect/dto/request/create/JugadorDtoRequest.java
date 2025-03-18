@@ -1,8 +1,9 @@
-package com.atlantic.proyect.dto.request;
+package com.atlantic.proyect.dto.request.create;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,9 +12,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class TipoRolDtoRequest {
+public class JugadorDtoRequest {
     @JsonProperty("id")
-    private Long idTipoRol;
-    @NotBlank(message = "El nombre debe tener contenido")
-    private String nombre;
+    private Long idJugador;
+    @Valid
+    @NotNull(message = "El usuario es requerido")
+    private UsuarioDtoRequest usuario;
 }

@@ -1,10 +1,8 @@
 package com.atlantic.proyect.controller;
 
-import com.atlantic.proyect.dto.request.AreaDtoRequest;
+import com.atlantic.proyect.dto.request.create.AreaDtoRequest;
 import com.atlantic.proyect.dto.response.GenericResponse;
 import com.atlantic.proyect.service.IAreaService;
-import com.atlantic.proyect.utils.MapperUtil;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

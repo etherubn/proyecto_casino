@@ -1,9 +1,8 @@
 package com.atlantic.proyect.service.impl;
 
-import com.atlantic.proyect.dto.request.PersonaDtoRequest;
-import com.atlantic.proyect.dto.request.PersonaUpdateDtoRequest;
+import com.atlantic.proyect.dto.request.create.PersonaDtoRequest;
+import com.atlantic.proyect.dto.request.update.PersonaUpdateDtoRequest;
 import com.atlantic.proyect.entity.Persona;
-import com.atlantic.proyect.exception.AlreadyEntityExistException;
 import com.atlantic.proyect.exception.ModelNotFoundException;
 import com.atlantic.proyect.repository.PersonaRepo;
 import com.atlantic.proyect.repository.GenericRepo;
@@ -58,10 +57,8 @@ public class PersonaServiceImpl extends CRUDImpl<Persona, PersonaDtoRequest, Lon
 
     @Override
     @Transactional
-    public PersonaDtoRequest udpate(PersonaUpdateDtoRequest personaUpdateDtoRequest, Long aLong) {
+    public PersonaDtoRequest update(PersonaUpdateDtoRequest personaUpdateDtoRequest, Long aLong) {
         Persona persona = personaRepo.findById(aLong).orElseThrow(() -> new ModelNotFoundException("usuario"));
-        PersonaDtoRequest personaDtoRequest = mapperUtil.map(personaUpdateDtoRequest, PersonaDtoRequest.class);
-
 
         Optional.ofNullable(personaUpdateDtoRequest.getNombre())
                 .ifPresent(nombre -> persona.setNombre(nombre));
@@ -107,5 +104,17 @@ public class PersonaServiceImpl extends CRUDImpl<Persona, PersonaDtoRequest, Lon
                 .collect(Collectors.toMap(entry -> entry.getKey(), entry -> entry.getValue()));
     }
 
+    public Map<String,String> verifyUpdateDniAndTelefono(PersonaUpdateDtoRequest personaUpdateDtoRequest) {
+        String dni = personaUpdateDtoRequest.getDni();
+        String telefono = personaUpdateDtoRequest.getTelefono();
+
+        return Stream.of(
+                Optional.ofNullable(dni).filter(dniExist-> personaRepo.dniDiferenteId(dniExist,personaUpdateDtoRequest.getIdPersona()))
+                        .map(data-> Map.entry("dni",dni)),
+                Optional.ofNullable(telefono).filter(telefonoExist-> personaRepo.telefonoDiferenteId(telefonoExist,personaUpdateDtoRequest.getIdPersona()))
+                        .map(data-> Map.entry("telefono",telefono))
+        ).flatMap(optional-> optional.isPresent()? Stream.of(optional.get()): Stream.empty())
+                .collect(Collectors.toMap(entry -> entry.getKey(), entry -> entry.getValue()));
+    }
 
 }

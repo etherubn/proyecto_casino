@@ -1,6 +1,6 @@
 package com.atlantic.proyect.controller;
 
-import com.atlantic.proyect.dto.request.TipoJuegoDtoRequest;
+import com.atlantic.proyect.dto.request.create.TipoJuegoDtoRequest;
 import com.atlantic.proyect.dto.response.GenericResponse;
 import com.atlantic.proyect.service.ITipoJuegoService;
 import jakarta.validation.Valid;

@@ -1,12 +1,11 @@
 package com.atlantic.proyect.service.impl;
 
-import com.atlantic.proyect.dto.request.TipoJuegoDtoRequest;
+import com.atlantic.proyect.dto.request.create.TipoJuegoDtoRequest;
 import com.atlantic.proyect.entity.TipoJuego;
 import com.atlantic.proyect.repository.TipoJuegoRepo;
 import com.atlantic.proyect.repository.GenericRepo;
 import com.atlantic.proyect.service.ITipoJuegoService;
 import com.atlantic.proyect.utils.MapperUtil;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service

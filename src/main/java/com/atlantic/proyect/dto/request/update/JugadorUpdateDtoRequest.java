@@ -1,5 +1,6 @@
-package com.atlantic.proyect.dto.request;
+package com.atlantic.proyect.dto.request.update;
 
+import com.atlantic.proyect.dto.request.create.UsuarioDtoRequest;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.Valid;
@@ -12,10 +13,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class JugadorDtoRequest {
+public class JugadorUpdateDtoRequest {
     @JsonProperty("id")
     private Long idJugador;
     @Valid
-    @NotNull(message = "El usuario es requerido")
-    private UsuarioDtoRequest usuario;
+    private UsuarioUpdateDtoRequest usuario;
 }

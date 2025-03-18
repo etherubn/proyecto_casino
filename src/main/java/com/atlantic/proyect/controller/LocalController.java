@@ -1,6 +1,6 @@
 package com.atlantic.proyect.controller;
 
-import com.atlantic.proyect.dto.request.LocalDtoRequest;
+import com.atlantic.proyect.dto.request.create.LocalDtoRequest;
 import com.atlantic.proyect.dto.response.GenericResponse;
 import com.atlantic.proyect.service.ILocalService;
 import jakarta.validation.Valid;

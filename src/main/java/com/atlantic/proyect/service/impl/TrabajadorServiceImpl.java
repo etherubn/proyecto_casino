@@ -1,6 +1,6 @@
 package com.atlantic.proyect.service.impl;
 
-import com.atlantic.proyect.dto.request.TrabajadorDtoRequest;
+import com.atlantic.proyect.dto.request.create.TrabajadorDtoRequest;
 import com.atlantic.proyect.entity.Trabajador;
 import com.atlantic.proyect.repository.TrabajadorRepo;
 import com.atlantic.proyect.repository.GenericRepo;

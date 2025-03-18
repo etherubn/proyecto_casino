@@ -1,8 +1,8 @@
 package com.atlantic.proyect.service.impl;
 
-import com.atlantic.proyect.dto.request.PersonaDtoRequest;
-import com.atlantic.proyect.dto.request.UsuarioDtoRequest;
-import com.atlantic.proyect.dto.request.UsuarioUpdateDtoRequest;
+import com.atlantic.proyect.dto.request.create.PersonaDtoRequest;
+import com.atlantic.proyect.dto.request.create.UsuarioDtoRequest;
+import com.atlantic.proyect.dto.request.update.UsuarioUpdateDtoRequest;
 import com.atlantic.proyect.entity.Persona;
 import com.atlantic.proyect.entity.Rol;
 import com.atlantic.proyect.entity.Usuario;
@@ -80,28 +80,20 @@ public class UsuarioServiceImpl extends CRUDImpl<Usuario, UsuarioDtoRequest, Lon
     @Transactional
     public UsuarioDtoRequest update(UsuarioUpdateDtoRequest usuarioUpdateDtoRequest, Long aLong) {
         Usuario usuario = usuarioRepo.findById(aLong).orElseThrow(() -> new ModelNotFoundException("usuario"));
-        Map<String, String> errors = new HashMap<>();
-
         Optional.ofNullable(usuarioUpdateDtoRequest.getActivo())
                 .ifPresent(activo -> usuario.setActivo(activo));
 
         Optional.ofNullable(usuarioUpdateDtoRequest.getUsername())
-                .filter(username -> !usuarioRepo.existsByUsernameAndIdUsuarioIsNot(username, aLong))
-                .ifPresentOrElse(username -> usuario.setUsername(username),
-                        () -> {
-                            errors.put("username", usuario.getUsername());
-                        }
-                );
+                .ifPresent(username -> usuario.setUsername(username));
 
         Optional.ofNullable(usuarioUpdateDtoRequest.getFoto())
                 .ifPresent(foto -> usuario.setFoto(foto));
 
-
-
-
-        if (!errors.isEmpty()) {
-            throw new AlreadyEntityExistException("usuario", errors);
-        }
+        Optional.ofNullable(usuarioUpdateDtoRequest.getPersona())
+                .ifPresent(persona -> {
+                    PersonaDtoRequest personaDtoRequest = personaService.update(persona, aLong);
+                    usuario.setPersona(mapperUtil.map(personaDtoRequest, Persona.class));
+                });
 
         return mapperUtil.map(usuarioRepo.save(usuario), UsuarioDtoRequest.class);
     }
@@ -118,7 +110,22 @@ public class UsuarioServiceImpl extends CRUDImpl<Usuario, UsuarioDtoRequest, Lon
 
         return Stream.of(personaErrors, usuarioErrors)
                 .flatMap(map -> map.entrySet().stream())
-                .collect(Collectors.toMap(entry-> entry.getKey(), entry-> entry.getValue()));
+                .collect(Collectors.toMap(entry -> entry.getKey(), entry -> entry.getValue()));
+
+    }
+
+    public Map<String, String> verifyUpdateUsernameAndPerson(UsuarioUpdateDtoRequest usuarioUpdateDtoRequest) {
+        String username = usuarioUpdateDtoRequest.getUsername();
+        Map<String, String> personaErrors = personaService.verifyUpdateDniAndTelefono(usuarioUpdateDtoRequest.getPersona());
+        Map<String, String> usuarioErrors = new HashMap<>();
+
+        if (usuarioRepo.existsByUsernameAndIdUsuarioIsNot(username, usuarioUpdateDtoRequest.getIdUsuario())) {
+            usuarioErrors.put("username", username);
+        }
+
+        return Stream.of(personaErrors, usuarioErrors)
+                .flatMap(map -> map.entrySet().stream())
+                .collect(Collectors.toMap(entry -> entry.getKey(), entry -> entry.getValue()));
 
     }
 

@@ -1,6 +1,6 @@
 package com.atlantic.proyect.service.impl;
 
-import com.atlantic.proyect.dto.request.TipoRolDtoRequest;
+import com.atlantic.proyect.dto.request.create.TipoRolDtoRequest;
 import com.atlantic.proyect.entity.TipoRol;
 import com.atlantic.proyect.repository.TipoRolRepo;
 import com.atlantic.proyect.repository.GenericRepo;

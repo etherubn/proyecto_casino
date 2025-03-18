@@ -1,6 +1,6 @@
 package com.atlantic.proyect.service.impl;
 
-import com.atlantic.proyect.dto.request.AreaDtoRequest;
+import com.atlantic.proyect.dto.request.create.AreaDtoRequest;
 import com.atlantic.proyect.entity.Area;
 import com.atlantic.proyect.repository.AreaRepo;
 import com.atlantic.proyect.repository.GenericRepo;

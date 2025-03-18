@@ -1,6 +1,6 @@
 package com.atlantic.proyect.service.impl;
 
-import com.atlantic.proyect.dto.request.RegistroJuegoDtoRequest;
+import com.atlantic.proyect.dto.request.create.RegistroJuegoDtoRequest;
 import com.atlantic.proyect.entity.RegistroJuego;
 import com.atlantic.proyect.repository.RegistroJuegoRepo;
 import com.atlantic.proyect.repository.GenericRepo;

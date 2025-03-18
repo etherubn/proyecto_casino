@@ -1,6 +1,6 @@
 package com.atlantic.proyect.controller;
 
-import com.atlantic.proyect.dto.request.TipoRolDtoRequest;
+import com.atlantic.proyect.dto.request.create.TipoRolDtoRequest;
 import com.atlantic.proyect.dto.response.GenericResponse;
 import com.atlantic.proyect.service.ITipoRolService;
 import jakarta.validation.Valid;

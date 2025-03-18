@@ -1,8 +1,7 @@
-package com.atlantic.proyect.dto.request;
+package com.atlantic.proyect.dto.request.create;
 
 import com.atlantic.proyect.entity.Juego;
 import com.atlantic.proyect.entity.Local;
-import com.atlantic.proyect.entity.Tarjeta;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Min;

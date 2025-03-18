@@ -1,6 +1,6 @@
 package com.atlantic.proyect.controller;
 
-import com.atlantic.proyect.dto.request.RolDtoRequest;
+import com.atlantic.proyect.dto.request.create.RolDtoRequest;
 import com.atlantic.proyect.dto.response.GenericResponse;
 import com.atlantic.proyect.service.IRolService;
 import jakarta.validation.Valid;

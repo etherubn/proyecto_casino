@@ -1,8 +1,9 @@
-package com.atlantic.proyect.dto.request;
+package com.atlantic.proyect.dto.request.update;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,5 +20,6 @@ public class UsuarioUpdateDtoRequest {
     @Size(min = 3,max = 16,message = "El username debe tener entre 3 y 16 caracteres")
     private String username;
     private String foto;
+    @Valid
     private PersonaUpdateDtoRequest persona;
 }

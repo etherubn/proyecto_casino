@@ -8,8 +8,4 @@ import org.springframework.stereotype.Repository;
 public interface UsuarioRepo extends GenericRepo<Usuario, Long> {
     boolean existsByUsername(String username);
     boolean existsByUsernameAndIdUsuarioIsNot(String username, Long id);
-
-
-
-
 }

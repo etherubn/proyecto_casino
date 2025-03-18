@@ -1,4 +1,4 @@
-package com.atlantic.proyect.dto.request;
+package com.atlantic.proyect.dto.request.create;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -11,9 +11,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class LocalDtoRequest {
+public class TipoRolDtoRequest {
     @JsonProperty("id")
-    private Long idLocal;
+    private Long idTipoRol;
     @NotBlank(message = "El nombre debe tener contenido")
     private String nombre;
 }

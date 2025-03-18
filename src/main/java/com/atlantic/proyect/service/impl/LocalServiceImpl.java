@@ -1,12 +1,11 @@
 package com.atlantic.proyect.service.impl;
 
-import com.atlantic.proyect.dto.request.LocalDtoRequest;
+import com.atlantic.proyect.dto.request.create.LocalDtoRequest;
 import com.atlantic.proyect.entity.Local;
 import com.atlantic.proyect.repository.LocalRepo;
 import com.atlantic.proyect.repository.GenericRepo;
 import com.atlantic.proyect.service.ILocalService;
 import com.atlantic.proyect.utils.MapperUtil;
-import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service

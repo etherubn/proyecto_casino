@@ -1,4 +1,4 @@
-package com.atlantic.proyect.dto.request;
+package com.atlantic.proyect.dto.request.create;
 
 import com.atlantic.proyect.entity.Jugador;
 import com.fasterxml.jackson.annotation.JsonInclude;

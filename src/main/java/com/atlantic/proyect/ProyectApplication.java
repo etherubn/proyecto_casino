@@ -1,11 +1,7 @@
 package com.atlantic.proyect;
 
-import com.atlantic.proyect.dto.request.AreaDtoRequest;
-import com.atlantic.proyect.dto.request.PersonaDtoRequest;
-import com.atlantic.proyect.dto.request.TipoRolDtoRequest;
-import com.atlantic.proyect.entity.Area;
+import com.atlantic.proyect.dto.request.create.PersonaDtoRequest;
 import com.atlantic.proyect.entity.Persona;
-import com.atlantic.proyect.entity.Trabajador;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.CommandLineRunner;
