@@ -56,7 +56,7 @@ public class TipoJuegoServiceImpl extends CRUDImpl<TipoJuego, TipoJuegoDtoReques
     @Override
     @Transactional
     public TipoJuegoDtoRequest update(TipoJuegoDtoRequest tipoJuegoDtoRequest, Long aLong) {
-        if (tipoJuegoRepo.existsByNombreIgnoreCaseAndIdLocalIsNot(tipoJuegoDtoRequest.getNombre(), aLong)) {
+        if (tipoJuegoRepo.existsByNombreIgnoreCaseAndIdTipoJuegoIsNot(tipoJuegoDtoRequest.getNombre(), aLong)) {
             Map<String,String> errors = new HashMap<>();
             errors.put("nombre", tipoJuegoDtoRequest.getNombre());
             throw new AlreadyEntityExistException("tipo juego", errors);

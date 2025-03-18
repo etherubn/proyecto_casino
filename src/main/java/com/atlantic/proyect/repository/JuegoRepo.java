@@ -5,4 +5,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface JuegoRepo extends GenericRepo<Juego, Long> {
+    boolean existsByNombreIgnoreCase(String nombre);
+    boolean existsByNombreIgnoreCaseAndIdJuegoIsNot(String nombre, Long idJuego);
 }

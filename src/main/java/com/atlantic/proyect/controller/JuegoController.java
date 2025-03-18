@@ -1,6 +1,7 @@
 package com.atlantic.proyect.controller;
 
 import com.atlantic.proyect.dto.request.create.JuegoDtoRequest;
+import com.atlantic.proyect.dto.request.update.JuegoUpdateDtoRequest;
 import com.atlantic.proyect.dto.response.GenericResponse;
 import com.atlantic.proyect.service.IJuegoService;
 import jakarta.validation.Valid;
@@ -38,9 +39,9 @@ public class JuegoController {
         return ResponseEntity.noContent().build();
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<GenericResponse<JuegoDtoRequest>> update(@PathVariable Long id, @RequestBody @Valid JuegoDtoRequest juegoDtoRequest) {
-        return ResponseEntity.ok(new GenericResponse<>(Arrays.asList(juegoService.update(juegoDtoRequest,id)),200,"recurso actualizado"));
+    @PatchMapping("/{id}")
+    public ResponseEntity<GenericResponse<JuegoDtoRequest>> update(@PathVariable Long id, @RequestBody @Valid JuegoUpdateDtoRequest juegoUpdateDtoRequest) {
+        return ResponseEntity.ok(new GenericResponse<>(Arrays.asList(juegoService.update(juegoUpdateDtoRequest,id)),200,"recurso actualizado"));
     }
 
 }
