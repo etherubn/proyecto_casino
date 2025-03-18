@@ -2,6 +2,7 @@ package com.atlantic.proyect.service.impl;
 
 import com.atlantic.proyect.dto.request.create.JugadorDtoRequest;
 import com.atlantic.proyect.dto.request.create.TarjetaDtoRequest;
+import com.atlantic.proyect.dto.request.update.TarjetaJugadaDtoRequest;
 import com.atlantic.proyect.dto.request.update.TarjetaRecargaDtoRequest;
 import com.atlantic.proyect.entity.Tarjeta;
 import com.atlantic.proyect.exception.ExceptionGeneric;
@@ -68,13 +69,7 @@ public class TarjetaServiceImpl extends CRUDImpl<Tarjeta, TarjetaDtoRequest, Lon
 
     @Override
     public TarjetaDtoRequest recargarTarjeta(String codigo,TarjetaRecargaDtoRequest tarjetaRecargaDtoRequest) {
-        if (codigo.isBlank()) {
-            throw new ExceptionGeneric("codigo debe tener contenido");
-        }
-
-        if (codigo.length() != 10) {
-            throw new ExceptionGeneric("codigo debe tener 10 caracteres");
-        }
+        validarCodigo(codigo);
 
         Tarjeta tarjeta = tarjetaRepo.findByCodigo(codigo)
                 .orElseThrow(()-> new ExceptionGeneric("Tarjeta no encontrada"));
@@ -82,5 +77,32 @@ public class TarjetaServiceImpl extends CRUDImpl<Tarjeta, TarjetaDtoRequest, Lon
         double saldoActual = tarjetaRecargaDtoRequest.getSaldo()+tarjeta.getMonto();
         tarjeta.setMonto(saldoActual);
         return mapperUtil.map(tarjetaRepo.save(tarjeta), TarjetaDtoRequest.class);
+    }
+
+    @Override
+    public TarjetaDtoRequest completarJugada(String codigo,TarjetaJugadaDtoRequest tarjetaJugadaDtoRequest) {
+        validarCodigo(codigo);
+
+        double ganancia = tarjetaJugadaDtoRequest.getGanancia();
+
+        if (ganancia==0){
+            throw new ExceptionGeneric("La ganancia debe ser positivo");
+        }
+
+        Tarjeta tarjeta = tarjetaRepo.findByCodigo(codigo)
+                .orElseThrow(()-> new ExceptionGeneric("Tarjeta no encontrada"));
+        double saldoFinal = tarjeta.getMonto()+ganancia;
+        tarjeta.setMonto(saldoFinal);
+        return mapperUtil.map(tarjetaRepo.save(tarjeta), TarjetaDtoRequest.class);
+    }
+
+    private  void validarCodigo(String codigo) {
+        if (codigo.isBlank()) {
+            throw new ExceptionGeneric("codigo debe tener contenido");
+        }
+
+        if (codigo.length() != 10) {
+            throw new ExceptionGeneric("codigo debe tener 10 caracteres");
+        }
     }
 }

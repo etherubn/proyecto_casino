@@ -6,7 +6,6 @@ import com.atlantic.proyect.dto.request.update.UsuarioUpdateDtoRequest;
 import com.atlantic.proyect.entity.Persona;
 import com.atlantic.proyect.entity.Rol;
 import com.atlantic.proyect.entity.Usuario;
-import com.atlantic.proyect.exception.AlreadyEntityExistException;
 import com.atlantic.proyect.exception.ModelNotFoundException;
 import com.atlantic.proyect.repository.UsuarioRepo;
 import com.atlantic.proyect.repository.GenericRepo;

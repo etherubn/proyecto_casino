@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,16 +22,18 @@ public class RegistroJuegoDtoRequest {
     private Long idRegistroJuego;
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private LocalDateTime fechaRegistroJuego;
-    @Min(message = "La ganancia", value = 0)
-    @NotNull(message = "La ganancia debe tener contenido")
-    private Double ganancia;
-    @Min(message = "La ganancia", value = 0)
-    @NotNull(message = "La perdida debe tener contenido")
-    private Double perdida;
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private Double ganancia=0d;
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private Double perdida=0d;
     @NotNull(message = "La tarjeta debe tener contenido")
     private TarjetaDtoRequest tarjeta;
     @NotNull(message = "El local debe tener contenido")
-    private Local local;
+    private LocalDtoRequest local;
     @NotNull(message = "El juego debe tener contenido")
-    private Juego juego;
+    private JuegoDtoRequest juego;
+    @NotNull(message = "Debe tener un monto de apuesta")
+    @Positive(message = "La apuesta debe ser positiva")
+    @Min(value = 1,message = "LA apuesta mínima es de 1 sol")
+    private Double montoApuesta;
 }
