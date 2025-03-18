@@ -28,7 +28,7 @@ public class Usuario {
     private String password;
     private String foto;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_persona",foreignKey = @ForeignKey(name = "FK_USUARIO_PERSONA"),nullable = false)
     private Persona persona;
 

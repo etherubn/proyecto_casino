@@ -25,10 +25,5 @@ public class Tarjeta {
     @JoinColumn(name = "id_jugador",nullable = false,unique = true,foreignKey = @ForeignKey(name = "FK_TARJETA_JUGADOR"))
     private Jugador jugador;
 
-    @PrePersist
-    public void prePersist() {
-        if (codigo == null) {
-            codigo = UUID.randomUUID().toString().substring(0,8).toUpperCase();
-        }
-    }
+
 }

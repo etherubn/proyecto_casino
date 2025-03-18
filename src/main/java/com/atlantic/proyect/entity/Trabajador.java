@@ -1,7 +1,6 @@
 package com.atlantic.proyect.entity;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -20,7 +19,7 @@ public class Trabajador {
     @JoinColumn(nullable = false,name = "id_area",foreignKey = @ForeignKey(name = "FK_TRABAJADOR_AREA"))
     private Area area;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_usuario")
     private Usuario usuario;
 }

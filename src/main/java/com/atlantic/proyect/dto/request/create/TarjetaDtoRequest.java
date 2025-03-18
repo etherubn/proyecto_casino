@@ -17,7 +17,7 @@ public class TarjetaDtoRequest {
     @JsonProperty("id")
     private Long idTarjeta;
     @NotNull(message = "El jugador debe tener contenido")
-    private Jugador jugador;
+    private JugadorDtoRequest jugador;
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private String codigo;
     @Min(value = 0,message = "El monto debe ser mayor a 0")

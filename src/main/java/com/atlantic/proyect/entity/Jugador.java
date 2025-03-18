@@ -16,7 +16,7 @@ public class Jugador {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idJugador;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "id_usuario", nullable = false)
     private Usuario usuario;
 
