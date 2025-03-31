@@ -37,6 +37,7 @@ public class PersonaDtoRequest {
     @NotBlank(message = "El telefono debe tener contenido")
     private String telefono;
     @Size(min = 8,message = "La direccion debe tener minimo 8 caracteres")
+    @NotBlank(message = "LA direccion debe tener contenido")
     private String direccion;
     @NotNull(message = "LA fecha de nacimiento debe tener contenido")
     private LocalDate fechaNacimiento;

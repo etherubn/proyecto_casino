@@ -5,4 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AreaRepo extends GenericRepo<Area, Long> {
+    boolean existsByNombreIgnoreCase(String nombre);
 }

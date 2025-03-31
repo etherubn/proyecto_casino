@@ -1,33 +1,40 @@
 package com.atlantic.proyect.service.impl;
 
 import com.atlantic.proyect.dto.request.create.JugadorDtoRequest;
+import com.atlantic.proyect.dto.request.create.RolDtoRequest;
 import com.atlantic.proyect.dto.request.create.UsuarioDtoRequest;
 import com.atlantic.proyect.dto.request.update.JugadorUpdateDtoRequest;
 import com.atlantic.proyect.entity.Jugador;
+import com.atlantic.proyect.entity.Rol;
 import com.atlantic.proyect.entity.Usuario;
 import com.atlantic.proyect.exception.AlreadyEntityExistException;
 import com.atlantic.proyect.exception.ModelNotFoundException;
 import com.atlantic.proyect.repository.JugadorRepo;
 import com.atlantic.proyect.repository.GenericRepo;
 import com.atlantic.proyect.service.IJugadorService;
+import com.atlantic.proyect.service.IRolService;
 import com.atlantic.proyect.service.IUsuarioService;
 import com.atlantic.proyect.utils.MapperUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class JugadorServiceImpl extends CRUDImpl<Jugador, JugadorDtoRequest,Long> implements IJugadorService {
     private final JugadorRepo jugadorRepo;
     private final IUsuarioService usuarioService;
+    private final IRolService rolService;
 
 
-    public JugadorServiceImpl(MapperUtil mapperUtil, JugadorRepo jugadorRepo, IUsuarioService usuarioService) {
+    public JugadorServiceImpl(MapperUtil mapperUtil, JugadorRepo jugadorRepo, IUsuarioService usuarioService, IRolService rolService) {
         super(mapperUtil);
         this.jugadorRepo = jugadorRepo;
         this.usuarioService = usuarioService;
+        this.rolService = rolService;
     }
 
     @Override
@@ -58,18 +65,15 @@ public class JugadorServiceImpl extends CRUDImpl<Jugador, JugadorDtoRequest,Long
         Map<String,String> errors = usuarioService.verifyCreateUsernameAndPerson(jugadorDtoRequest.getUsuario());
 
         if (!errors.isEmpty()) {
-            System.out.println(errors);
             throw new AlreadyEntityExistException("jugador", errors);
         }
 
-
-        UsuarioDtoRequest usuarioDtoRequest = usuarioService.save(jugadorDtoRequest.getUsuario());
-        jugadorDtoRequest.setUsuario(usuarioDtoRequest);
-
-        Jugador createdJugador = jugadorRepo.save(mapperUtil.map(jugadorDtoRequest, Jugador.class));
+        Set<RolDtoRequest> rolesDto = Set.of(rolService.findRolByTipoRol("USER"));
+        jugadorDtoRequest.getUsuario().setRoles(rolesDto);
 
 
-        return mapperUtil.map(createdJugador, JugadorDtoRequest.class);
+
+        return mapperUtil.map(save(jugadorDtoRequest), JugadorDtoRequest.class);
     }
 
     @Override

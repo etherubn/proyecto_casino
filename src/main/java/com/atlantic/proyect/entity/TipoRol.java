@@ -1,5 +1,6 @@
 package com.atlantic.proyect.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,6 +18,7 @@ public class TipoRol {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Long idTipoRol;
+
 
     @Column(nullable = false,unique = true)
     private String nombre;

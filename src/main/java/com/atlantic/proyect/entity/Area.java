@@ -13,11 +13,16 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Area {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @EqualsAndHashCode.Include
     private Long idArea;
 
-    @Column(nullable = false,unique = true)
+    @Column(nullable = true,unique = true)
     private String nombre;
+
+    @PrePersist
+    public void prePersist() {
+        this.nombre = this.nombre.toUpperCase();
+    }
 
 }

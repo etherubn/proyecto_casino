@@ -1,5 +1,6 @@
 package com.atlantic.proyect.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,7 +19,7 @@ public class Rol {
     @EqualsAndHashCode.Include
     private Long idRol;
 
-    @OneToOne
-    @JoinColumn(name = "id_tipo_rol",nullable = false,foreignKey = @ForeignKey(name = "FK_ROL_TIPOROL"),unique = true)
+    @OneToOne(cascade =CascadeType.ALL)
+    @JoinColumn(name = "id_tipo_rol",foreignKey = @ForeignKey(name = "FK_ROL_TIPOROL"))
     private TipoRol tipoRol;
 }

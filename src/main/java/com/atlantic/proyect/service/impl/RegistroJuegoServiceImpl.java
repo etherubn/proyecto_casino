@@ -92,8 +92,7 @@ public class RegistroJuegoServiceImpl extends CRUDImpl<RegistroJuego, RegistroJu
     }
 
     private boolean isGanoJugada() {
-        boolean ganoJugada = Math.random() > 0.5;
-        return ganoJugada;
+        return Math.random() > 0.5;
     }
 
 

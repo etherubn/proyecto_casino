@@ -64,12 +64,6 @@ public class UsuarioServiceImpl extends CRUDImpl<Usuario, UsuarioDtoRequest, Lon
         Persona persona = mapperUtil.map(personaDtoRequest, Persona.class);
         Usuario usuario = mapperUtil.map(usuarioDtoRequest, Usuario.class);
         usuario.setPersona(persona);
-
-        Set<Rol> roles = new HashSet<>();
-        Rol rol = mapperUtil.map(rolService.findRolByTipoRol("USER"), Rol.class);
-        roles.add(rol);
-        usuario.setRoles(roles);
-
         usuario = usuarioRepo.save(usuario);
 
         return mapperUtil.map(usuario, UsuarioDtoRequest.class);

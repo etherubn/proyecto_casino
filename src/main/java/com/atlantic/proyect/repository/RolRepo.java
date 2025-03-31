@@ -7,5 +7,5 @@ import java.util.Optional;
 
 @Repository
 public interface RolRepo extends GenericRepo<Rol, Long> {
-    Optional<Rol> findOneByTipoRol_Nombre(String nombre);
+    Optional<Rol> findOneByTipoRol_NombreIgnoreCase(String nombre);
 }

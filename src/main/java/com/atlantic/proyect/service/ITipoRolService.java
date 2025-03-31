@@ -4,5 +4,5 @@ import com.atlantic.proyect.dto.request.create.TipoRolDtoRequest;
 
 
 public interface ITipoRolService extends ICRUDService<TipoRolDtoRequest,Long> {
-
+    boolean existByNombre(String nombre);
 }

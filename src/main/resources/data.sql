@@ -2,15 +2,13 @@ INSERT INTO tipo_rol (nombre)
 VALUES ('ADMIN');
 INSERT INTO tipo_rol (nombre)
 VALUES ('USER');
-INSERT INTO tipo_rol (nombre)
-VALUES ('MARKETING');
+
 
 INSERT INTO rol (id_tipo_rol)
 VALUES (1);
 INSERT INTO rol (id_tipo_rol)
 VALUES (2);
-INSERT INTO rol (id_tipo_rol)
-VALUES (3);
+
 
 
 INSERT INTO local (nombre)
