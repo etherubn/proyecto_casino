@@ -1,13 +1,21 @@
 INSERT INTO tipo_rol (nombre)
-VALUES ('ADMIN');
-INSERT INTO tipo_rol (nombre)
-VALUES ('USER');
-
+VALUES ('ADMIN'),
+       ('USER'),
+       ('FINANZAS'),
+       ('RECURSOS_HUMANOS'),
+       ('TECNOLOGIA');
 
 INSERT INTO rol (id_tipo_rol)
-VALUES (1);
-INSERT INTO rol (id_tipo_rol)
-VALUES (2);
+VALUES (1),
+       (2),
+       (3),
+       (4),
+       (5);
+
+INSERT INTO area (nombre)
+VALUES ('FINANZAS'),
+       ('RECURSOS HUMANOS'),
+       ('TECNOLOGÍA');
 
 
 
@@ -47,6 +55,12 @@ VALUES ('Raul', 'Moreno', 'Postigo', '77777777', true, '986294178', 'Calle Loma 
        ('Claudia', 'Gómez', 'Vásquez', '77777785', false, '983456789', 'Calle Santa Rosa 555', '1994-06-25'),
        ('Andrés', 'Jiménez', 'Reyes', '77777786', true, '984567890', 'Calle Los Olivos 678', '1989-09-17');
 
+INSERT INTO persona (nombre, apellido_paterno, apellido_materno, dni, genero, telefono, direccion, fecha_nacimiento)
+VALUES ('Fernando', 'Torres', 'Vega', '11111111', true, '985678901', 'Av. Grau 852', '1991-04-21'),
+       ('Sofia', 'Ramirez', 'Ortega', '11111112', false, '986789012', 'Calle Arequipa 963', '1993-12-30'),
+       ('Diego', 'Castillo', 'Mendoza', '11111113', true, '987890123', 'Jr. Tacna 147', '1986-07-11'),
+       ('Elena', 'Vargas', 'Huaman', '11111114', false, '988901234', 'Pasaje Miraflores 321', '1998-05-05'),
+       ('Ricardo', 'Gonzales', 'Paredes', '11111115', true, '989012345', 'Av. Salaverry 159', '1992-11-09');
 
 INSERT INTO usuario (activo, fecha_registro, foto, password, username, id_persona)
 VALUES (true, '2025-03-18', 'foto1.jpg', 'pass123', 'user1', 1),
@@ -60,22 +74,43 @@ VALUES (true, '2025-03-18', 'foto1.jpg', 'pass123', 'user1', 1),
        (true, '2025-03-18', 'foto9.jpg', 'pass123', 'user9', 9),
        (true, '2025-03-18', 'foto10.jpg', 'pass123', 'user10', 10);
 
+INSERT INTO usuario (activo, fecha_registro, foto, password, username, id_persona)
+VALUES (true, '2025-03-18', 'foto11.jpg', 'pass123', 'user11', 11),
+       (true, '2025-03-18', 'foto12.jpg', 'pass123', 'user12', 12),
+       (true, '2025-03-18', 'foto13.jpg', 'pass123', 'user13', 13),
+       (true, '2025-03-18', 'foto14.jpg', 'pass123', 'user14', 14),
+       (true, '2025-03-18', 'foto15.jpg', 'pass123', 'user15', 15);
+
 INSERT INTO usuario_rol (id_usuario, id_rol)
 SELECT id_usuario, 2
 FROM usuario
 WHERE id_usuario BETWEEN 1 AND 10;
+
+INSERT INTO usuario_rol (id_usuario, id_rol)
+VALUES (11, 3),
+       (12, 4),
+       (13, 5),
+       (14, 3),
+       (15, 4);
 
 INSERT INTO jugador (id_usuario)
 SELECT id_usuario
 FROM usuario
 WHERE id_usuario BETWEEN 1 AND 10;
 
+INSERT INTO trabajador (id_usuario, id_area)
+VALUES
+    (11, 1), -- Asignado a Finanzas
+    (12, 2), -- Asignado a Recursos Humanos
+    (13, 1), -- Asignado a Tecnología
+    (14, 2), -- Otro en Finanzas
+    (15, 3); -- Otro en Recursos Humanos
+
 
 INSERT INTO tarjeta (id_jugador, monto, codigo)
-SELECT
-    j.id_jugador,
-    (j.id_jugador * 100) AS monto,
-    CONCAT(p.dni, UPPER(LEFT(p.nombre, 1)), UPPER(LEFT(p.apellido_paterno, 1))) AS codigo
+SELECT j.id_jugador,
+       (j.id_jugador * 100)                                                          AS monto,
+       CONCAT(p.dni, UPPER(LEFT (p.nombre, 1)), UPPER(LEFT (p.apellido_paterno, 1))) AS codigo
 FROM jugador j
          JOIN usuario u ON j.id_usuario = u.id_usuario
          JOIN persona p ON u.id_persona = p.id_persona
